@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var quizController = require('../controllers/quiz_controller');
-var tipController = require('../controllers/tip_controller');
+var quizController = require('../../quiz_2017/controllers/quiz_controller');
+var tipController = require('../../quiz_2017/controllers/tip_controller');
 var userController = require('../controllers/user_controller');
 var sessionController = require('../controllers/session_controller');
 
@@ -129,6 +129,7 @@ router.put('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)/accept',
     tipController.accept);
 router.delete('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)',
     sessionController.loginRequired,
+    tipController.adminOrAuthorTipRequired,
     tipController.destroy);
 
 
