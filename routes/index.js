@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var quizController = require('../../quiz_2017/controllers/quiz_controller');
-var tipController = require('../../quiz_2017/controllers/tip_controller');
+var quizController = require('../controllers/quiz_controller');
+var tipController = require('../controllers/tip_controller');
 var userController = require('../controllers/user_controller');
 var sessionController = require('../controllers/session_controller');
 
@@ -57,6 +57,14 @@ router.param('tipId',  tipController.load);
 router.get('/session', sessionController.new);     // formulario login
 router.post('/session', sessionController.create);  // crear sesión
 router.delete('/session', sessionController.destroy); // destruir sesión
+
+router.get('/quizzes/randomplay', quizController.randomplay);
+router.get('/quizzes/randomcheck/:quizId(\\d+)', quizController.randomcheck);
+
+router.get('/help', function(req, res, next) {
+    res.render('help');
+});
+
 
 
 // Definición de rutas de cuenta
@@ -129,8 +137,10 @@ router.put('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)/accept',
     tipController.accept);
 router.delete('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)',
     sessionController.loginRequired,
-    tipController.adminOrAuthorTipRequired,
     tipController.destroy);
 
 
 module.exports = router;
+
+
+
