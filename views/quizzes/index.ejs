@@ -19,6 +19,7 @@
         </td>
         <td colspan="2">
             <small> (by <%= quiz.Author ? quiz.Author.username : "Anómino" %>) </small>
+            <small> (num_pistas <%= quiz.Tips ? quiz.Tips.length : "0" %>) </small>
         </td>
 
         <% if (session.user) { %>

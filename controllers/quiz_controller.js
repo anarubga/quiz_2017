@@ -97,7 +97,8 @@ exports.index = function (req, res, next) {
 
             findOptions.offset = items_per_page * (pageno - 1);
             findOptions.limit = items_per_page;
-            findOptions.include = [{model: models.User, as: 'Author'}];
+            findOptions.include = [{model: models.User, as: 'Author'},{model: models.Tip}];
+
 
             return models.Quiz.findAll(findOptions);
         })
